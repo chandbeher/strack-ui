@@ -13,7 +13,7 @@ import {
 } from 'reactstrap';
 
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 
 import IntlMessages from '../../helpers/IntlMessages';
 import {
@@ -53,6 +53,8 @@ const TopNav = ({
 }) => {
   const [isInFullScreen, setIsInFullScreen] = useState(false);
   const [searchKeyword, setSearchKeyword] = useState('');
+
+  const loggedInUser = useSelector((state) => state.authUser.currentUser);
 
   const search = () => {
     history.push(`${searchPath}?key=${searchKeyword}`);
@@ -301,7 +303,7 @@ const TopNav = ({
         <div className="user d-inline-block">
           <UncontrolledDropdown className="dropdown-menu-right">
             <DropdownToggle className="p-0" color="empty">
-              <span className="name mr-1">Sarah Kortney</span>
+              <span className="name mr-1">{loggedInUser?.title}</span>
               <span>
                 <img alt="Profile" src="/assets/img/profiles/l-1.jpg" />
               </span>
